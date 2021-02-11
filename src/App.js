@@ -17,11 +17,19 @@ function App() {
   const onKeyUp = async (e) => {
     e.preventDefault();
     const location = e.target.value;
-
+    if(!location){
+      setState({
+        weather: undefined,
+        showError: false,
+        message: '',
+      })
+    }
+    else{
     timer && clearTimeout(timer);
     timer = setTimeout(() => {
       API_call(location);
     }, 500);
+  }
   };
 
   const API_call = async (location) => {

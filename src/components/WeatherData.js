@@ -26,7 +26,7 @@ function WeatherData({ weatherData }) {
       >
         Details
       </button>
-      {state.showWeatherDetails && <WeatherDetails main={main} />}
+      {state.showWeatherDetails && <WeatherDetails main={main} wind={weatherData.wind}/>}
     </div>
   );
 }
