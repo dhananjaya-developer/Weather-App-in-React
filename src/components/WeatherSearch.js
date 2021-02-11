@@ -1,17 +1,24 @@
-import React from 'react'
+import React from "react";
+import "../css/weathersearch.scss";
 
-class WeatherSearch extends React.Component{
-    render(){
-        const request=this.props.api_call
-        return (
-            <>
-            <form onSubmit={request} className="search-form">
-                <input name="location" className="user-input" type="text" placeholder="Location"/>
-                <button className="search-button">&rarr;</button>
-            </form>
-            </>
-        )
-    }
+function WeatherSearch({ api_call }) {
+  return (
+    <>
+      <div className="form__group field">
+        <input
+          name="location"
+          id="location"
+          className="form__field"
+          type="text"
+          placeholder="Location"
+          onKeyUp={api_call}
+        />
+        <label htmlFor="location" className="form__label">
+          Location
+        </label>
+      </div>
+    </>
+  );
 }
 
 export default WeatherSearch;
