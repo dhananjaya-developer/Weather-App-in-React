@@ -1,0 +1,146 @@
+$primary: #11998e;
+$secondary: #38ef7d;
+$white: #fff;
+$gray: #9b9b9b;
+.form__group {
+  position: relative;
+  padding: 15px 18px 0;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid black;
+  outline: 0;
+  font-size: 1.3rem;
+  color: #1A0006;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: black;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $primary;
+    font-weight: 700;
+  }
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, $primary, $secondary);
+  border-image-slice: 1;
+}
+/* reset input */
+.form__field {
+  &:required,
+  &:invalid {
+    box-shadow: none;
+  }
+}
+
+.button {
+  margin: 6px;
+  --color: #fff;
+  --color-hover: var(--color);
+  --background: #2B3044;
+  --background-hover: var(--background);
+  --hover-back: #6D58FF;
+  --hover-front: #5C86FF;
+  padding: 12px 28px;
+  border-radius: 20px;
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  border: none;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  color: var(--c, var(--color));
+  background: var(--b, var(--background));
+  transition: color .2s linear var(--c-d, .2s), background .3s linear var(--b-d, .2s);
+  &:not(.simple) {
+      &:before,
+      &:after {
+          content: '';
+          position: absolute;
+          background: var(--pb, var(--hover-back));
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 200%;
+          border-radius: var(--br, 40%);
+          transform: translateY(var(--y, 50%));
+          transition: transform var(--d, .4s) ease-in var(--d-d, 0s), border-radius .5s ease var(--br-d, .08s);
+
+      }
+      &:after {
+          --pb: var(--hover-front);
+          --d: .44s;
+      }
+  }
+  div {
+      z-index: 1;
+      position: relative;
+      display: flex;
+      span {
+          display: block;
+          backface-visibility: hidden;
+          transform: translateZ(0);
+          animation: var(--name, none) .7s linear forwards .18s;
+      }
+  }
+  &.in {
+      --name: move;
+      &:not(.out) {
+          --c: var(--color-hover);
+          --b: var(--background-hover);
+          &:before,
+          &:after {
+              --y: 0;
+              --br: 5%;
+          }
+          &:after {
+              --br: 10%;
+              --d-d: .02s;
+          }
+      }
+      &.out {
+          --name: move-out;
+          &:before {
+              --d-d: .06s;
+          }
+      }
+  }
+}

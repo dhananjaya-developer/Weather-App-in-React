@@ -1,15 +1,13 @@
-import React from 'react'
+import React from "react";
 
-class WeatherDetails extends React.Component{
-    render(){
-        const main=this.props.main;
-        return(
-            <div className="weather-details">
-              <p className="weather-detail">Pressure: ${main.pressure}</p>
-              <p className="weather-detail">Humidity: ${main.humidity}</p>
-            </div>
-        )
-    }
+function WeatherDetails({ main ,wind}) {
+  return (
+    <div className="weather-details">
+      <p className="weather-detail">Pressure: {main.pressure}</p><br/>
+      <p className="weather-detail">Humidity: {main.humidity}</p><br/>
+      <p className="weather-detail">Wind Speed: {wind.speed}</p>
+    </div>
+  );
 }
 
-export default WeatherDetails
+export default WeatherDetails;
