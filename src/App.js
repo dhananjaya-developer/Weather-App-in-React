@@ -8,7 +8,8 @@ import Error from './components/Error'
 class App extends React.Component {
   state={
     weather:null,
-    showError:false
+    showError:false,
+    message:''
   }
 
   weathersearch_api= async (e)=>{
@@ -19,10 +20,10 @@ class App extends React.Component {
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`
       const res=await fetch(url);
       const data=await res.json();
-      this.setState({weather:data,showError:false})
+      data.cod!=="404"?this.setState({weather:data,showError:false}):this.setState({showError:true,message:data.message});
     }
     else{
-      this.setState({showError:true})
+      this.setState({showError:true,message:'Please enter the name of the city.'})
     }
     //console.log(this.state.weather)
   }
@@ -32,7 +33,7 @@ class App extends React.Component {
       <Header/>
       <WeatherSearch api_call={this.weathersearch_api} />
       {this.state.weather &&  <WeatherData weatherData={this.state.weather}/>}
-      {this.state.showError && <Error/>}
+      {this.state.showError && <Error message={this.state.message}/>}
       </>
     );
   }

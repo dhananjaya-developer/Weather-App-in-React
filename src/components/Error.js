@@ -4,7 +4,7 @@ class Error extends React.Component{
     render(){
         return(
             <div className="error">
-            <p className="error-text">Please enter the name of the city.</p>
+            <p className="error-text">{this.props.message}</p>
           </div>
         )
     }
