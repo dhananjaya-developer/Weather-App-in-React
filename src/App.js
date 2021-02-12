@@ -53,6 +53,38 @@ function App() {
       });
     }
   };
+
+  const API_call_using_current_location=async (position)=>{
+    if (position) {
+      const API_KEY = "9c3cb98520f309bd159e77512e8e5e28";
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&appid=${API_KEY}&units=metric`;
+      const res = await fetch(url);
+      const data = await res.json();
+      data.cod !== "404"
+        ? setState({ weather: data, showError: false })
+        : setState({
+            weather: undefined,
+            showError: true,
+            message: data.message,
+          });
+    } else {
+      setState({
+        weather: undefined,
+        showError: true,
+        message: "Please enter the name of the city.",
+      });
+    }
+  };
+
+  useEffect(function () {
+     const get_current_location=() => {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        API_call_using_current_location(position.coords);
+      });
+    }
+    get_current_location();
+  },[]);
+
   return (
     <>
       <Header />
