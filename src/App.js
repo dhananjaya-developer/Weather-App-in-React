@@ -1,4 +1,5 @@
 import "./App.css";
+import env from "react-dotenv";
 import React from "react";
 import Header from "./components/Header";
 import WeatherSearch from "./components/WeatherSearch";
@@ -12,7 +13,7 @@ function App() {
     showError: false,
     message: "",
   });
-
+  
   let timer;
   const onKeyUp = async (e) => {
     e.preventDefault();
@@ -34,7 +35,7 @@ function App() {
 
   const API_call = async (location) => {
     if (location) {
-      const API_KEY = "9c3cb98520f309bd159e77512e8e5e28";
+      const API_KEY = env.API_KEY;
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`;
       const res = await fetch(url);
       const data = await res.json();
